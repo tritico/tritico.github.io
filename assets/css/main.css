@@ -2262,7 +2262,7 @@
 				}
 
 		.box.special {
-			text-align: center;
+			/*text-align: center; */
 		}
 
 		.box .image.featured {
@@ -3106,12 +3106,12 @@
 		padding: 4em 0;
 	}
 
-		#main > header {
-			text-align: center;
+		#main > header {			
 			margin: 0 0 3em 0;
 		}
 
 			#main > header h2 {
+				text-align: center;
 				font-size: 2.75em;
 				margin: 0;
 			}
