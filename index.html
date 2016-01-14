@@ -17,7 +17,7 @@
           ga('require', 'linkid');
           ga('require', 'displayfeatures');
           ga('send', 'pageview');
-
+		
         </script>  		
 	</head>
 	<body class="landing">
@@ -32,7 +32,7 @@
 							<li><a href="schedule.html">Schedule</a></li>
 							<li><a href="contact.html" class="button">Contact</a></li>
 						</ul>
-					</nav>
+					</nav>					
 				</header>
 
 			<!-- Banner -->
@@ -40,12 +40,16 @@
 					<h2>triti.co</h2>					
 					<p>
 						<span class="strike">&nbsp;&nbsp;coming soon&nbsp;&nbsp;</span><br/>
-                		departing soon  
+                		
+						departing soon  
+                		<div id="clockdiv" style="margin-top:-20px;">
+							<span class="days"></span>:<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+						</div>
 					</p>
 					<ul class="actions">
 						<li><a href="schedule.html" class="button special small">Schedule</a></li>
 						<li><a href="contact.html" class="button special small">Contact</a></li>
-					</ul>				
+					</ul>								
 				</section>
 
 			<!-- Main -->
@@ -174,6 +178,54 @@
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/vide-min.js"></script>  
+
+			<script>
+
+		
+			function getTimeRemaining(endtime) {
+			  var t = Date.parse(endtime) - Date.parse(new Date());
+			  var seconds = Math.floor((t / 1000) % 60);
+			  var minutes = Math.floor((t / 1000 / 60) % 60);
+			  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+			  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+			  return {
+			    'total': t,
+			    'days': days,
+			    'hours': hours,
+			    'minutes': minutes,
+			    'seconds': seconds
+			  };
+			}
+
+			function initializeClock(id, endtime) {
+			  var clock = document.getElementById(id);
+			  var daysSpan = clock.querySelector('.days');
+			  var hoursSpan = clock.querySelector('.hours');
+			  var minutesSpan = clock.querySelector('.minutes');
+			  var secondsSpan = clock.querySelector('.seconds');
+
+			  function updateClock() {
+			    var t = getTimeRemaining(endtime);
+
+			    daysSpan.innerHTML = t.days;
+			    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+			    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+			    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+			    if (t.total <= 0) {
+			      clearInterval(timeinterval);
+			    }
+			  }
+
+			  updateClock();
+			  var timeinterval = setInterval(updateClock, 1000);
+			}
+
+			//var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+			var deadline = new Date(Date.parse('01/30/2016 5:20 pm'));
+			initializeClock('clockdiv', deadline);
+
+			</script>
 
 	</body>
 </html>
